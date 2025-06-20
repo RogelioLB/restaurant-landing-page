@@ -3,16 +3,49 @@
 ---
 
 <script>
-  // Simple toggle for mobile navigation
+  // Enhanced mobile navigation with sidebar
   document.addEventListener('DOMContentLoaded', () => {
     const menuToggle = document.getElementById('mobile-menu-toggle');
-    const navMenu = document.getElementById('nav-menu');
+    const navMenu = document.getElementById('mobile-sidebar');
+    const overlay = document.getElementById('sidebar-overlay');
+    const navLinks = document.querySelectorAll('#mobile-sidebar a');
     
-    menuToggle?.addEventListener('click', () => {
-      navMenu?.classList.toggle('hidden');
+    // Función para abrir el sidebar
+    const openSidebar = () => {
+      navMenu?.classList.add('sidebar-open');
+      overlay?.classList.remove('hidden');
+      document.body.classList.add('overflow-hidden');
+    };
+    
+    // Función para cerrar el sidebar
+    const closeSidebar = () => {
+      navMenu?.classList.remove('sidebar-open');
+      overlay?.classList.add('hidden');
+      document.body.classList.remove('overflow-hidden');
+    };
+    
+    // Event listeners
+    menuToggle?.addEventListener('click', openSidebar);
+    overlay?.addEventListener('click', closeSidebar);
+    document.getElementById('close-sidebar')?.addEventListener('click', closeSidebar);
+    
+    // Cerrar sidebar cuando se hace clic en cualquier enlace
+    navLinks.forEach(link => {
+      link.addEventListener('click', closeSidebar);
     });
   });
 </script>
+
+<style>
+  .sidebar {
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .sidebar-open {
+    transform: translateX(0%);
+  }
+</style>
 
 <nav class="fixed top-4 left-0 right-0 lg:left-1/2 transform lg:-translate-x-1/2 bg-black rounded-full shadow-lg px-6 py-3 mx-4 lg:w-auto max-w-7xl z-50">
   <div class="flex justify-between items-center gap-16">
@@ -39,7 +72,7 @@
     
     <!-- Mobile Menu Toggle -->
     <div class="md:hidden">
-      <button id="mobile-menu-toggle" class="text-gray-800 focus:outline-none">
+      <button id="mobile-menu-toggle" class="text-white focus:outline-none">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
         </svg>
@@ -47,13 +80,32 @@
     </div>
   </div>
   
-  <!-- Mobile Menu Dropdown -->
-  <div id="nav-menu" class="md:hidden hidden absolute right-0 left-0 mt-3 bg-white rounded-lg shadow-lg overflow-hidden">
-    <div class="flex flex-col py-2 px-4 space-y-3">
-      <a href="#" class="text-gray-800 hover:text-orange-500 py-2 transition">Inicio</a>
-      <a href="#menu" class="text-gray-800 hover:text-orange-500 py-2 transition">Menú</a>
-      <a href="#about" class="text-gray-800 hover:text-orange-500 py-2 transition">Nosotros</a>
-      <a href="#location" class="text-gray-800 hover:text-orange-500 py-2 transition">Ubicación</a>
+  <!-- Overlay para el sidebar -->
+  <div id="sidebar-overlay" class="hidden fixed inset-0 bg-black/50 z-50"></div>
+  
+  <!-- Mobile Menu Sidebar -->
+  <div id="mobile-sidebar" class="sidebar fixed top-0 right-0 h-full w-64 bg-black z-50 shadow-lg">
+    <div class="flex flex-col h-full">
+      <div class="flex justify-between items-center p-4 border-b border-gray-800">
+        <h2 class="text-white text-lg font-medium">YOOKI</h2>
+        <button id="close-sidebar" class="text-white hover:text-red-500 focus:outline-none">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+      <div class="flex flex-col py-6 px-4 space-y-4">
+        <a href="#" class="text-white hover:text-red-500 py-2 transition border-b border-gray-800">Inicio</a>
+        <a href="#menu" class="text-white hover:text-red-500 py-2 transition border-b border-gray-800">Menú</a>
+        <a href="#about" class="text-white hover:text-red-500 py-2 transition border-b border-gray-800">Nosotros</a>
+        <a href="#location" class="text-white hover:text-red-500 py-2 transition border-b border-gray-800">Ubicación</a>
+        <a href="https://wa.me/526671234567" class="mt-4 bg-red-600 text-white px-5 py-3 rounded-full font-medium hover:bg-red-500 transition-colors duration-300 flex items-center justify-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+            <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+          </svg>
+          Reservar
+        </a>
+      </div>
     </div>
   </div>
 </nav>
