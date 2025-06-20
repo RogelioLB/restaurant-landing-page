@@ -1,0 +1,79 @@
+---
+// Componente para animaciones de scroll con GSAP
+---
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  
+  // Registrar el plugin ScrollTrigger con GSAP
+  gsap.registerPlugin(ScrollTrigger);
+  
+  document.addEventListener('DOMContentLoaded', () => {
+    // Animaciones para elementos que entran en viewport
+    gsap.utils.toArray('.animate-on-scroll').forEach((element: HTMLElement) => {
+      gsap.from(element, {
+        y: 50,
+        opacity: 0,
+        duration: 0.8,
+        scrollTrigger: {
+          trigger: element,
+          start: "top 85%", // Comienza la animación cuando el elemento está al 85% del viewport
+          toggleActions: "play none none none",
+          // markers: true, // Útil para debug, quitar en producción
+        }
+      });
+    });
+    
+    // Animación para secuencias de elementos
+    gsap.utils.toArray('.stagger-container').forEach((container: HTMLElement) => {
+      const items = container.querySelectorAll('.stagger-item');
+      
+      gsap.from(items, {
+        y: 40,
+        opacity: 0,
+        duration: 0.5,
+        stagger: 0.15,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: container,
+          start: "top 80%",
+          toggleActions: "play none none none",
+        }
+      });
+    });
+    
+    // Animación para imágenes con efecto parallax
+    gsap.utils.toArray('.parallax-image').forEach((image: HTMLElement) => {
+      gsap.to(image, {
+        y: -50,
+        ease: "none",
+        scrollTrigger: {
+          trigger: image.parentElement,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: 0.5,
+        }
+      });
+    });
+
+    // Animación de contador para números
+    gsap.utils.toArray('.animate-counter').forEach((counter: HTMLElement) => {
+      const target = parseFloat(counter.getAttribute('data-target'));
+      
+      ScrollTrigger.create({
+        trigger: counter,
+        start: "top 90%",
+        onEnter: () => {
+          gsap.to(counter, {
+            duration: 2,
+            innerText: target,
+            roundProps: "innerText",
+            snap: { innerText: 1 },
+            ease: "power2.inOut"
+          });
+        }
+      });
+    });
+  });
+</script>

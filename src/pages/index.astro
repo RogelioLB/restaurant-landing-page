@@ -1,0 +1,51 @@
+---
+// Component Imports
+import Navigation from '../components/Navigation.astro';
+import Hero from '../components/Hero.astro';
+import ScrollAnimations from '../components/ScrollAnimations.astro';
+import AboutSection from '../components/AboutSection.astro';
+import MenuSection from '../components/MenuSection.astro';
+import LocationSection from '../components/LocationSection.astro';
+import WhatsAppWidget from '../components/WhatsAppWidget.astro';
+import Footer from '../components/Footer.astro';
+
+// Full Astro Component Syntax:
+// https://docs.astro.build/core-concepts/astro-components/
+---
+
+<html lang="es" style="scroll-behavior: smooth;">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Restaurante - Sabores Auténticos</title>
+		<meta name="description" content="Disfruta de la mejor experiencia gastronómica con sabores auténticos y un ambiente acogedor." />
+	</head>
+
+	<body class="bg-gray-50 ">
+		<!-- Navegación -->
+		<Navigation />
+		
+		<!-- Hero Section - Con slogan y grid bento de platos -->
+		<Hero />
+		
+		<!-- Sección Acerca de Nosotros con animaciones scroll -->
+		<AboutSection />
+		
+		<!-- Sección del Menú -->
+		<MenuSection />
+		
+		<!-- Sección de ubicación -->
+		<LocationSection />
+		
+		<!-- Incluir componente de animaciones de scroll -->
+		<ScrollAnimations />
+		
+		<!-- Widget de WhatsApp -->
+		<WhatsAppWidget />
+		
+		<!-- Footer -->
+		<Footer />
+	</body>
+</html>

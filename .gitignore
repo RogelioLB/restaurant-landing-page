@@ -1,0 +1,6 @@
+.astro
+node_modules
+sandbox
+sandbox.config.json
+sandbox.lock
+.stackblitzrc

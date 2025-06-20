@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="400px" height="400px" viewBox="0 0 400 400" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <rect width="400" height="400" fill="#03A9F4"/>
+    <circle cx="200" cy="200" r="120" fill="#29B6F6" stroke="#FFF" stroke-width="6"/>
+    <text x="200" y="205" font-family="Arial" font-size="28" font-weight="bold" text-anchor="middle" fill="#FFF">Cóctel</text>
+</svg>

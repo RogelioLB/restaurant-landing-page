@@ -1,0 +1,139 @@
+---
+// Hero component for restaurant landing page with Bento grid
+---
+
+<script>
+  // Importar GSAP
+  import { gsap } from 'gsap';
+
+  document.addEventListener('DOMContentLoaded', () => {
+    // Timeline principal
+    const mainTimeline = gsap.timeline({ defaults: { ease: 'power3.out' } });
+    
+    // Animación del texto del slogan
+    mainTimeline.from('.hero-title', {
+      y: 50,
+      opacity: 0,
+      duration: 1,
+      stagger: 0.2
+    });
+    
+    mainTimeline.from('.hero-description', {
+      y: 30,
+      opacity: 0,
+      duration: 0.8,
+    }, '-=0.6');
+    
+    mainTimeline.from('.hero-cta', {
+      scale: 0.9,
+      opacity: 0,
+      duration: 0.5,
+    }, '-=0.4');
+    
+    // Animación del grid bento con stagger para entrada secuencial
+    mainTimeline.from('.bento-item', {
+      y: 60,
+      opacity: 0,
+      duration: 0.7,
+      stagger: 0.15,
+      ease: 'back.out(1.7)'
+    }, '-=0.5');
+    
+    // Animaciones de hover para las imágenes
+    const bentoItems = document.querySelectorAll('.bento-item');
+    
+    bentoItems.forEach(item => {
+      item.addEventListener('mouseenter', () => {
+        gsap.to(item.querySelector('img'), {
+          scale: 1.05,
+          duration: 0.5
+        });
+      });
+      
+      item.addEventListener('mouseleave', () => {
+        gsap.to(item.querySelector('img'), {
+          scale: 1,
+          duration: 0.5
+        });
+      });
+    });
+  });
+</script>
+
+<section class="relative min-h-screen py-20 overflow-hidden pt-30 bg-black">
+  <div class="container mx-auto px-4 md:px-8">
+    <div class="flex flex-col md:flex-row items-center justify-between md:gap-10 gap-2">
+      <!-- Left side - Slogan -->
+      <div class="w-full md:w-2/5 space-y-6">
+        <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight">
+          <span class="hero-title block text-white">YOOKI</span> <span class="hero-title text-red-600 block">SUSHI EXPERIENCE</span>
+        </h1>
+        <p class="hero-description text-xl text-gray-300 md:pr-10">
+          La auténtica experiencia del sushi japonés con un toque moderno y creativo para despertar todos tus sentidos.
+        </p>
+        <div class="pt-4">
+          <a href="#reservar" class="hero-cta inline-block bg-red-600 text-white font-medium rounded-full px-8 py-3 shadow-lg hover:bg-red-700 transition duration-300">
+            Reserva ahora
+          </a>
+        </div>
+      </div>
+      
+      <!-- Right side - Bento Grid -->
+      <div class="w-full md:w-3/5 h-[500px] grid grid-cols-5 grid-rows-3 gap-4">
+        <!-- Main dish - Large center image -->
+        <div class="bento-item col-span-3 row-span-2 overflow-hidden rounded-2xl shadow-lg">
+          <img 
+            src="/images/plato-principal.svg" 
+            alt="Plato principal del restaurante" 
+            class="w-full h-full object-cover"
+          />
+        </div>
+        
+        <!-- Top right image -->
+        <div class="bento-item col-span-2 row-span-1 overflow-hidden rounded-2xl shadow-lg">
+          <img 
+            src="/images/plato-secundario-1.svg" 
+            alt="Plato de temporada" 
+            class="w-full h-full object-cover"
+          />
+        </div>
+        
+        <!-- Middle right image -->
+        <div class="bento-item col-span-2 row-span-1 overflow-hidden rounded-2xl shadow-lg">
+          <img 
+            src="/images/plato-secundario-2.svg" 
+            alt="Plato especialidad" 
+            class="w-full h-full object-cover"
+          />
+        </div>
+        
+        <!-- Bottom left image -->
+        <div class="bento-item col-span-2 row-span-1 overflow-hidden rounded-2xl shadow-lg">
+          <img 
+            src="/images/postre-1.svg" 
+            alt="Postre de la casa" 
+            class="w-full h-full object-cover"
+          />
+        </div>
+        
+        <!-- Bottom middle image -->
+        <div class="bento-item col-span-1 row-span-1 overflow-hidden rounded-2xl shadow-lg">
+          <img 
+            src="/images/bebida-1.svg" 
+            alt="Bebida especial" 
+            class="w-full h-full object-cover"
+          />
+        </div>
+        
+        <!-- Bottom right image -->
+        <div class="bento-item col-span-2 row-span-1 overflow-hidden rounded-2xl shadow-lg">
+          <img 
+            src="/images/ambiente-1.svg" 
+            alt="Ambiente del restaurante" 
+            class="w-full h-full object-cover"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
